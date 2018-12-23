@@ -14,9 +14,16 @@
       Install <a href="https://nodejs.org/en/" target="_blank">NodeJs</a>
     </li>
     <li>
-      make folder for you project and open there console (cmd or PowerShell or ...):
+      Open folder with your projects and open git bash there. ///
       <br>
-      <pre>npm i Gulp</pre>
+      <pre>git clone https://github.com/VladG0r/clean_template.git</pre>
+      <br>
+      git will create new folder /clean_template, rename it as you want and open it.
+    </li>
+    <li>
+      In this folder open console (cmd or PowerShell or ...) (click at top-left on blue button 'File' -> run PowerShell here):
+      <br>
+      <pre>npm i</pre>
     </li>
     <li>
       <pre>Gulp</pre>
