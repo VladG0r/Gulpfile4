@@ -46,12 +46,12 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('styles', function() {
-  return gulp.src([paths.styles.src+'/**/*.sass',paths.styles.src+'/**/*.scss'])
+  return gulp.src( paths.styles.src+'/**/*.{sass,scss}' )
   .pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
   .pipe(rename({ suffix: '.min', prefix : '' }))
   .pipe(autoprefixer(['last 15 versions']))
   .pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
-  .pipe(gulp.dest(paths.styles.dst))
+  .pipe(gulp.dest( paths.styles.dst ))
   .pipe(browserSync.stream())
 });
 
@@ -106,18 +106,18 @@ gulp.task('rsync', function() {
 
 if (gulpversion == 3) {
   gulp.task('watch', ['styles', 'scripts', 'pug', 'browser-sync'], function() {
-    gulp.watch([paths.styles.src+'/**/*.sass',paths.styles.src+'/**/*.scss'], ['styles']);
-    gulp.watch(paths.scripts.src+'/**/*.js', ['scripts']);
-    gulp.watch(paths.src+'/**/!(_)*.pug', ['pug'])
+    gulp.watch( paths.styles.src+'/**/*.{sass,scss}', ['styles'] );
+    gulp.watch( paths.scripts.src+'/**/*.js', ['scripts'] );
+    gulp.watch( paths.src+'/**/!(_)*.pug', ['pug'] )
   });
   gulp.task('default', ['watch']);
 }
 
 if (gulpversion == 4) {
   gulp.task('watch', function() {
-    gulp.watch([paths.styles.src+'/**/*.sass',paths.styles.src+'/**/*.scss'], gulp.parallel('styles'));
-    gulp.watch(paths.scripts.src+'/**/*.js', gulp.parallel('scripts'));
-    gulp.watch(paths.src+'/**/!(_)*.pug', gulp.series('pug'))//,'code'
+    gulp.watch( paths.styles.src+'/**/*.{sass,scss}', gulp.parallel('styles') );
+    gulp.watch( paths.scripts.src+'/**/*.js', gulp.parallel('scripts') );
+    gulp.watch( paths.src+'/**/!(_)*.pug', gulp.series('pug') )//,'code'
   });
   gulp.task('default', gulp.parallel('watch', 'pug', 'styles', 'scripts', 'browser-sync'));
 }
