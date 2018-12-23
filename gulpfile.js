@@ -62,7 +62,7 @@ if (is_js_min){
     .pipe(babel({presets: ['@babel/env']}))
     .pipe(uglify()) // Mifify js 
     .pipe(gulp.dest(paths.scripts.dst))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.reload({ stream: true }))
   });
 } else {
   gulp.task('scripts', function() {
@@ -70,7 +70,7 @@ if (is_js_min){
     .pipe(concat(js_file_name+'.js'))
     .pipe(babel({presets: ['@babel/env']}))
     .pipe(gulp.dest(paths.scripts.dst))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.reload({ stream: true }))
   });
 }
 
