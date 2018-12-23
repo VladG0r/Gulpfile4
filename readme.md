@@ -1,4 +1,5 @@
-<h1><strong>OptimizedHTML 4:</strong> <br>Startup HTML template based on Gulp 4.0.0</h1>
+<h1><strong>Clean WEB Page Template:</strong></h1>
+<h3>Startup HTML template based on Gulp 4.0.0</h3>
 
 <p>
 	This is very clean and simple WEB page template for developement using:<br>
@@ -14,7 +15,7 @@
       Install <a href="https://nodejs.org/en/" target="_blank">NodeJs</a>
     </li>
     <li>
-      Open folder with your projects and run Git bash there (install <a href="https://git-scm.com/downloads">Git</a> if you have no it).
+      Open folder with your projects and run Git bash there (install <a href="https://git-scm.com/downloads" target="_blank">Git</a> if you have no it).
       <br>
       <pre>git clone https://github.com/VladG0r/clean_template.git</pre>
       git will create new folder /clean_template, rename it as you want and open it.
