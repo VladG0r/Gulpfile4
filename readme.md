@@ -14,7 +14,7 @@
       Install <a href="https://nodejs.org/en/" target="_blank">NodeJs</a>
     </li>
     <li>
-      Open folder with your projects and run Git bash there.
+      Open folder with your projects and run Git bash there (install <a href="https://git-scm.com/downloads">Git</a> if you have no it).
       <br>
       <pre>git clone https://github.com/VladG0r/clean_template.git</pre>
       git will create new folder /clean_template, rename it as you want and open it.
