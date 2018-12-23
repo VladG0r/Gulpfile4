@@ -3,7 +3,7 @@
 
 <p>
 	This is very clean and simple WEB page template for developement using:<br>
-  <b>Nodejs, NPM, Gulp 4.0.0, Babel</b> (for ES6 scripts) <b>, SASS</b> (for nice CSS syntax).
+  <b>Nodejs, NPM, Gulp 4.0.0, Babel</b> (for ES6 scripts) <b>, SASS</b> (for nice CSS syntax) <b>, Pug </b>[named 'Jade' before] (for nice HTML syntax).
 </p>
 <p>
 	No Jquery used, no Bootstrap. It's very clean template, feel free to add any library to your project.
