@@ -1,12 +1,10 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
-    "rules": {
-        "semi": 2
-    }
+  "extends": "eslint:recommended",
+  "rules": {
+    "no-console": "process.env.NODE_ENV === 'production' ? 1 : 0",
+    "no-debugger": "process.env.NODE_ENV === 'production' ? 1 : 0"
+  },
+  "parserOptions": {
+    "parser": "babel-eslint"
+  }
 }

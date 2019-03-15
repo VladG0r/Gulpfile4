@@ -1,6 +1,7 @@
 var gulp          = require('gulp'),
     gutil         = require('gulp-util' ),
     sass          = require('gulp-sass'),
+    stylus        = require('gulp-stylus'),
     browserSync   = require('browser-sync'),
     concat        = require('gulp-concat'),
     uglify        = require('gulp-uglify'),
@@ -12,9 +13,10 @@ var gulp          = require('gulp'),
     pug           = require('gulp-pug'),
     babel         = require('gulp-babel');
 
-var js_file_name  = 'scripts', // file will be: "js/scripts.js";
-    is_js_min     = false,     // minimized will be: "js/scripts.min.js";
-    gulpversion   = '4'; // Gulp version: 3 or 4
+var js_file_name  = 'scripts',  // file will be: "js/scripts.js";
+    is_js_min     = false,      // minimized will be: "js/scripts.min.js";
+    gulpversion   = '4',        // Gulp version: 3 or 4
+    cssPre        = 'stylus';   // CSS preprocessor 'stylus' or 'sass'
 
 var paths = {
   src:'src',
@@ -44,20 +46,33 @@ gulp.task('browser-sync', function() {
     // tunnel: true, tunnel: "projectname", // Demonstration page: http://projectname.localtunnel.me
   });
 });
-
+if ( cssPre == 'stylus' ){
 gulp.task('styles', function() {
-  return gulp.src( paths.styles.src+'/**/*.{sass,scss}' )
-  .pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
-  .pipe(rename({ suffix: '.min', prefix : '' }))
-  .pipe(autoprefixer(['last 15 versions']))
-  .pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
-  .pipe(gulp.dest( paths.styles.dst ))
-  .pipe(browserSync.stream());
+  return gulp.src( paths.styles.src+'/**/*.{styl,stylus}' )
+    .pipe( stylus({
+      'include css': true
+    }).on("error", notify.onError()) )
+    .pipe(rename({ suffix: '.min', prefix : '' }))
+    .pipe(autoprefixer(['ChromeAndroid >= 70'])) // supported browsers
+    //.pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
+    .pipe(gulp.dest( paths.styles.dst ))
+    .pipe(browserSync.stream());
 });
+} else {
+  gulp.task('styles', function() {
+    return gulp.src( paths.styles.src+'/**/!(_)*.{sass,scss}' )
+    .pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
+    .pipe(rename({ suffix: '.min', prefix : '' }))
+    .pipe(autoprefixer(['last 15 versions']))
+    .pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
+    .pipe(gulp.dest( paths.styles.dst ))
+    .pipe(browserSync.stream());
+});
+}
 
-if (is_js_min){
+if ( is_js_min ){
   gulp.task('scripts', function() {
-    return gulp.src(paths.scripts.src+'/**/*.js')
+    return gulp.src(paths.scripts.src+'/**/!(_)*.js')
     .pipe(concat(js_file_name+'.min.js'))
     .pipe(babel({presets: ['@babel/env']}))
     .pipe(uglify()) // Mifify js 
@@ -66,7 +81,7 @@ if (is_js_min){
   });
 } else {
   gulp.task('scripts', function() {
-    return gulp.src(paths.scripts.src+'/**/*.js')
+    return gulp.src(paths.scripts.src+'/**/!(_)*.js')
     .pipe(concat(js_file_name+'.js'))
     .pipe(babel({presets: ['@babel/env']}))
     .pipe(gulp.dest(paths.scripts.dst))
